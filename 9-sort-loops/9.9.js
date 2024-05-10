@@ -22,5 +22,5 @@ function arrDecreasing (arr) {
 	return arr;
 }
 
-console.log(arrIncrease(arr));
+console.log(arrIncreasing(arr));
 console.log(arrDecreasing(arr));
