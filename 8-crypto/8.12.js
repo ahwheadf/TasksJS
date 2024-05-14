@@ -1,28 +1,21 @@
+const encrypt = crypto('password'); // 'ssapdrow'
+const decrypt = crypto(encrypt); // 'password'
+
 function crypto(password) {
-	const separate = password.split('');
+	let separate = password.split('');
 	separate.reverse();
-	[separate[2], separate[5]] = [separate[5], separate[2]];
-	[separate[0], separate[3]] = [separate[3], separate[0]];
-	[separate[7], separate[1]] = [separate[1], separate[7]];
+	const firstHalf = separate.splice(separate.length / 2);
+	const secondHalf = separate;
+	separate = firstHalf.concat(secondHalf); 
 	password = separate.join('');
-	console.log(password);
 	return password;
-	
 }
 
 function check(cryptoPassword, basicPassword){
-	const separate = cryptoPassword.split('');
-	[separate[1], separate[7]] = [separate[7], separate[1]];
-	[separate[3], separate[0]] = [separate[0], separate[3]];
-	[separate[5], separate[2]] = [separate[2], separate[5]];
-	separate.reverse();
-	cryptoPassword = separate.join('');
-	if(cryptoPassword === basicPassword){
-		return true;
-	}
-	return false;
+   	if(basicPassword === '' || cryptoPassword === '') {
+    	return false;
+   	}
+   	return basicPassword === crypto(cryptoPassword);
 }
 
-crypto('password');
-
-console.log(check('wpsdsoar', 'password'));
+console.log(check('ssapdrow', 'password'));

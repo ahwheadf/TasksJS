@@ -6,25 +6,37 @@ const targetСurrency = '¥';
 
 
 function converter(amount, sourceCurrency, targetСurrency){
-	switch(true){
-		case sourceCurrency === '₽':
-			return targetСurrency === '$' ? amount / 33.33 : 
-			targetСurrency === '€' ? amount / 100 : 
-			targetСurrency === '¥' ? amount * 1.69 : 0;
-		case sourceCurrency === '$':
-			return targetСurrency === '₽' ? amount * 33.33 :
-			targetСurrency === '€' ? amount * 0.94 :
-			targetСurrency === '¥' ? amount * 158 : 0;
-		case sourceCurrency === '€':
-			return targetСurrency === '₽' ? amount * 100 :
-			targetСurrency === '$' ? amount * 1.07 : 
-			targetСurrency === '¥' ? amount * 168 : 0;
-		case sourceCurrency === '¥':
-			return targetСurrency === '₽' ? amount * 0.59 :
-			targetСurrency === '$' ? amount * 0.0063 :
-			targetСurrency === '€' ? amount * 0.0059 : 0;
+	switch(sourceCurrency){
+		case '₽':
+			switch(targetСurrency){
+				case '$': return amount / 33.33;
+				case '€': return amount / 100;
+				case '¥': return amount * 1.69;
+				default: null;
+			}
+		case '$':
+			switch(targetСurrency){
+				case '₽': return amount * 33.33;
+				case '€': return amount * 0.94;
+				case '¥': return amount * 158;
+				default: null;
+			}
+		case '€':
+			switch(targetСurrency){
+				case '₽': return amount * 100;
+				case '$': return amount * 1.07;
+				case '¥': return amount * 168;
+				default: null;
+			}
+		case '¥':
+			switch(targetСurrency){
+				case '₽': return amount * 0.59;
+				case '$': return amount * 0.0063;
+				case '€': return amount * 0.0059;
+				default: null;
+			}
 		default:
-			return 0;
+			return null;
 	}
 }
 
